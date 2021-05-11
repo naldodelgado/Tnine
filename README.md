@@ -1,2 +1,6 @@
 # Tnine
-Tabelas de símbolos; Tabelas de hash sobre strings; Interfaces gráficas simples
+T9 é uma tecnologia de texto preditivo para
+telefones móveis (especificamente aqueles que têm
+um teclado numérico 3 × 4), originalmente
+desenvolvida pela Tegic Communications, agora
+parte da Nuance Communications. T9 vem de “Texto em 9 teclas”.
