@@ -1,9 +1,19 @@
+/* COMO COMPILAR:
+    -> gcc -o tnine tnine.c $(pkg-config --cflags gtk+-3.0 pkg-config --libs gtk+-3.0)
+                                    ou
+    -> gcc -o tnine tnine.c 'pkg-config --cflags gtk+-3.0 pkg-config --libs gtk+-3.0'
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
 #include <string.h>
 #include "header.h"
 
+GtkWidget *window;
+GtkWidget *grid;
+GtkWidget *button;
 GtkWidget *label;
 
 void button_clicked(GtkWidget *widget, gpointer data) {
@@ -18,10 +28,6 @@ void button_clicked(GtkWidget *widget, gpointer data) {
 
 
 int main(int argc, char *argv[]) {
-    GtkWidget *window;
-    GtkWidget *grid;
-    
-    GtkWidget *button;
     gchar *values[12] = { "1", "2 abc", "3 def","4 ghi", "5 jkl", "6 mno","7 pqrs", "8 tuv", "9 wxyz", "* #","0", "SPACE"};
 
     gtk_init(&argc, &argv);
@@ -39,6 +45,7 @@ int main(int argc, char *argv[]) {
     int j = 0;
     int pos = 0;
     gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 3, 1);
+
     for (i=1; i < 5; i++) {
         for (j=0; j < 3; j++) {
             button = gtk_button_new_with_label(values[pos]);
