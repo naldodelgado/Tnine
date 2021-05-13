@@ -9,10 +9,10 @@ GtkWidget *label;
 void button_clicked(GtkWidget *widget, gpointer data) {
     g_print("%s\n", (char*) data);
     char * aux = malloc(256*sizeof(char)); 
-    const char * str = (char *) gtk_label_get_text((GtkLabel *) label);
-    strcat(aux,str);
-    strcat(aux,(char*)data);
-    gtk_label_set_text((GtkLabel *) label,(char *)aux);
+    //const char * str = (char *) gtk_label_get_text((GtkLabel *) label);
+    //strcat(aux,str);
+    //strcat(aux,(char*)data);
+    gtk_label_set_text((GtkLabel *)label,(char *) data);
 }
 
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 250, 180);
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 0);
     gtk_window_set_title(GTK_WINDOW(window), "T9");
     gtk_container_set_border_width(GTK_CONTAINER(window), 5);
 
