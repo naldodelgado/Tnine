@@ -18,9 +18,10 @@ GtkWidget *button;
 GtkWidget *label;
 
 void button_clicked(GtkWidget *widget, gpointer data) {
-    g_print("%s\n", (char*) data);
-    char * aux = malloc(256*sizeof(char)); 
+    //g_print("%s\n", (char*) data);
+    //char * aux = malloc(256*sizeof(char)); 
     char * str = (char *) gtk_label_get_text((GtkLabel *) label);
+    puts(str);
     gtk_label_set_text((GtkLabel *)label,strcat(str, (char *) data));
 }
 
