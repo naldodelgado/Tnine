@@ -18,6 +18,7 @@ GtkWidget *button;
 GtkWidget *label;
 
 void button_clicked(GtkWidget *widget, gpointer data) {
+<<<<<<< HEAD
     gpointer ans;
     g_print("%s\n", (char*) data);
     char* aux = malloc(256*sizeof(char));
