@@ -18,7 +18,6 @@ GtkWidget *button;
 GtkWidget *label;
 
 void button_clicked(GtkWidget *widget, gpointer data) {
-<<<<<<< HEAD
     gpointer ans;
     g_print("%s\n", (char*) data);
     char* aux = malloc(256*sizeof(char));
@@ -57,10 +56,14 @@ void button_clicked2(GtkWidget *widget, gpointer data) {
 }
 
 void clicked(GtkWidget *widget, GdkEventButton* event, gpointer data) {
-    if (event->type == GDK_2BUTTON_PRESS)
+    if (event->type == GDK_2BUTTON_PRESS) {
         button_clicked2(widget,data);
-    else
+        g_print("click2\n");
+    }
+    else {
         button_clicked(widget,data);
+        g_print("click1\n");
+    }
 }
 
 
@@ -82,7 +85,7 @@ int main(int argc, char *argv[]) {
     gtk_fixed_put(GTK_FIXED(fixed),label,5,5);   // posição da label
 
     grid = gtk_grid_new();
-    gtk_grid_set_row_spacing(GTK_GRID(grid), 2);    
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 1);    
     int pos = 0;
     for (int i=0; i < 4; i++) {
         for (int j=0; j < 3; j++) {
