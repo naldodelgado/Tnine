@@ -6,7 +6,7 @@
 char stringvazia[1] = {'\0'};
 tipoObjeto objetonulo = {stringvazia,0};
 
-#define M 1021
+#define M 10000
 
 link tab[M];
 
@@ -52,9 +52,19 @@ tipoObjeto STsearch(string v) {
 int main(int argc, char* argv[]) {
     FILE *fp;
     fp = fopen(argv[1],"r");
-    char ch;
-    while ((ch=fgetc(fp))!=EOF) {
-        
+    char *w = malloc(1024*sizeof(char));
+    STinit();
+    while (fscanf(fp,"%s",w)!=EOF) {
+        //puts(w);
+        tipoObjeto t = STsearch(w);
+        if (!strcmp(t.chave,stringvazia)) {
+            tipoObjeto aux = {w,1};
+            STinsert(aux);
+        }
+        else {
+            t.ocorrencias++;
+        }
+        printf("%s -> %d\n", w, t.ocorrencias);
     }
     return 0;
 }

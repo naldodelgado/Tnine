@@ -8,5 +8,5 @@ typedef struct STnode *link;
 struct STnode {
     tipoObjeto obj;
     link next;
-};
+} STnode;
 
