@@ -1,20 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "hash.h"
 
 char stringvazia[1] = {'\0'};
 tipoObjeto objetonulo = {stringvazia,0};
 
-#define M 10000
+#define M 262139
 
 link tab[M];
 
 int hash(string v) {
     int i, h=v[0];
-    for (i=1; v[i]!='\0'; i++)
+    for (i=1; v[i]!='\0'; i++) {
+        v[i] = verify_char(v[i]);
         h = (h*251+v[i]) % M;
+    }
+    if (h<0) return 0;
     return h;
+}
+
+char verify_char(uint ch) {
+    if (ch>=0x00E0 && ch<=0x00E5) return 'a';
+    if (ch==0x00E7) return 'c';
+    if (ch>=0x00E8 && ch<=0x00EB) return 'e';
+    if (ch>=0x00EC && ch<=0x00EF) return 'i';
+    if (ch>=0x00F2 && ch<=0x00F6) return 'o';
+    if (ch>=0x00F9 && ch<=0x00FC) return 'u';
+    else return ch;
 }
 
 void STinit() {
@@ -32,7 +46,6 @@ void STinsert(tipoObjeto obj) {
     if (t!=NULL)
         t->obj.ocorrencias++;
     else {
-        obj.ocorrencias = 1;
         link novo = malloc(sizeof(STnode));
         novo->obj = obj;
         novo->next = tab[h];
@@ -52,10 +65,13 @@ tipoObjeto STsearch(string v) {
 int main(int argc, char* argv[]) {
     FILE *fp;
     fp = fopen(argv[1],"r");
-    char *w = malloc(1024*sizeof(char));
+    char *w = malloc(256*sizeof(char));
     STinit();
     while (fscanf(fp,"%s",w)!=EOF) {
         //puts(w);
+        if (w[strlen(w)-1]==',' || w[strlen(w)-1]=='.' || w[strlen(w)-1]=='!' || w[strlen(w)-1]=='?')
+            w[strlen(w)-1] = '\0';
+        
         tipoObjeto t = STsearch(w);
         if (!strcmp(t.chave,stringvazia)) {
             tipoObjeto aux = {w,1};

@@ -10,3 +10,8 @@ struct STnode {
     link next;
 } STnode;
 
+int hash(string v);
+char verify_char(uint ch);
+void STinit();
+void STinsert(tipoObjeto obj);
+tipoObjeto STsearch(string v);
