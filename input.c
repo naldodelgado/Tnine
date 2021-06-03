@@ -17,9 +17,13 @@ string* n2c(int number) {
     switch (number) {
     case 2: return "abc";
     case 3: return "def";
-    
+    case 4: return "ghi";
+    case 5: return "jkl";
+    case 6: return "mno";
+    case 7: return "pqrs";
+    case 8: return "tuv";
+    case 9: return "wxyz";
     default: return "";
-        break;
     }
 }
 
@@ -35,7 +39,7 @@ string* predict(int input){
     //     printf("%s ",letters[aux[i]-2]);
     // puts("");
 
-
+    
 
     return ans;
 }
