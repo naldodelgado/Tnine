@@ -16,7 +16,6 @@ link tab[M];
 int hash(string v) {
     int i, h=v[0];
     for (i=1; v[i]!='\0'; i++) {
-        // tolower v[i];
         h = (h*251+v[i]) % M;
     }
      //printf("%d ",h);
@@ -49,7 +48,6 @@ void STinsert(tipoObjeto* obj) {
 tipoObjeto* STsearch(string v) {
     link t;
     int h = hash(v);
-    // printf("%d ",h);
     for (t=tab[h]; t!=NULL; t=t->next){
         if (strcmp(t->obj->chave,v)==0) break;
     }
@@ -67,6 +65,11 @@ int main(int argc, char* argv[]) {
         if (w[strlen(w)-1]==',' || w[strlen(w)-1]=='.' || w[strlen(w)-1]=='!' || w[strlen(w)-1]=='?' || w[strlen(w)-1]==')')
             w[strlen(w)-1] = '\0';
         
+        int size_w = strlen(w);
+        for (int i=0; i<size_w; i++) {
+            w[i] = tolower((int)w[i]);
+        }
+
         tipoObjeto* t = malloc(sizeof(tipoObjeto));
         tipoObjeto* aux= malloc(sizeof(tipoObjeto));
         t = STsearch(w);
@@ -79,25 +82,15 @@ int main(int argc, char* argv[]) {
         }
         else { 
             STinsert(t);
-            // printf("%s -> %d\n", w,  t->ocorrencias);
+            // printf("%s -> %d\n", w, t->ocorrencias);
         }
     }
     
     fclose(fp);
     puts("DONE READING FILE");
 
-    // tipoObjeto* teste = STsearch("sorte");
-    // printf("%d %s\n",teste->ocorrencias, teste->chave);
+    int input; scanf("%d", &input);
+    string* solution = predict(input);
 
-    // int hv = hash("sorte");
-    // link t;
-    // for(t = tab[hv]; t!=NULL; t=t->next){
-    //     printf("%d %s\n",t->obj.ocorrencias, t->obj.chave);
-    // }
-
-    // int input;
-    // scanf("%d",&input);
-    // string* possibilities = malloc(256*sizeof(string));
-    // possibilities =  predict(input);
     return 0;
 }

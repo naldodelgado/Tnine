@@ -13,16 +13,29 @@ int getInputSize(int input){
     return counter;
 }
 
+string* n2c(int number) {
+    switch (number) {
+    case 2: return "abc";
+    case 3: return "def";
+    
+    default: return "";
+        break;
+    }
+}
+
 string* predict(int input){
     int size = getInputSize(input);
-    int* aux = malloc(size*sizeof(int));
-    for(int i = size-1; i >=0; i--){
+    string* ans = malloc(size*size*size*sizeof(string));
+    int aux[size];
+    for(int i=size-1; i>=0; i--){
         aux[i] = input%10;
         input/=10;
     }
-    for(int i = 0; i<size; i++){
-        printf("%s ",letters[aux[i]-2]);
-    }
-    string uf[2] = {"bla","bla"};
-    return uf;
+    // for(int i = 0; i<size; i++)
+    //     printf("%s ",letters[aux[i]-2]);
+    // puts("");
+
+
+
+    return ans;
 }
