@@ -6,7 +6,7 @@
 char stringvazia[1] = {'\0'};
 tipoObjeto objetonulo = {stringvazia,0};
 
-#define M 10000
+#define M 262139
 
 link tab[M];
 
@@ -14,6 +14,7 @@ int hash(string v) {
     int i, h=v[0];
     for (i=1; v[i]!='\0'; i++)
         h = (h*251+v[i]) % M;
+    //printf("%d\n",h);
     return h;
 }
 
@@ -26,6 +27,7 @@ void STinit() {
 void STinsert(tipoObjeto obj) {
     string v = obj.chave;
     int h = hash(v);
+    //printf("h é %d\n",h);
     link t;
     for (t=tab[h]; t!=NULL; t=t->next)
         if (strcmp(t->obj.chave,v)==0) break;
@@ -52,19 +54,21 @@ tipoObjeto STsearch(string v) {
 int main(int argc, char* argv[]) {
     FILE *fp;
     fp = fopen(argv[1],"r");
-    char *w = malloc(1024*sizeof(char));
+    char *w = malloc(2048*sizeof(char));
     STinit();
     while (fscanf(fp,"%s",w)!=EOF) {
         //puts(w);
         tipoObjeto t = STsearch(w);
         if (!strcmp(t.chave,stringvazia)) {
             tipoObjeto aux = {w,1};
+            puts(w);
             STinsert(aux);
+            //puts("ok");
         }
         else {
             t.ocorrencias++;
         }
-        printf("%s -> %d\n", w, t.ocorrencias);
+        //printf("%s -> %d\n", w, t.ocorrencias);
     }
     return 0;
 }
