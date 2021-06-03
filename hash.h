@@ -6,11 +6,11 @@ typedef struct {
 
 typedef struct STnode *link;
 struct STnode {
-    tipoObjeto obj;
+    tipoObjeto* obj;
     link next;
 } STnode;
 
 int hash(string v);
 void STinit();
-void STinsert(tipoObjeto obj);
-tipoObjeto STsearch(string v);
+void STinsert(tipoObjeto* obj);
+tipoObjeto* STsearch(string v);
