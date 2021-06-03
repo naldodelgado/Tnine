@@ -14,22 +14,22 @@ link tab[M];
 int hash(string v) {
     int i, h=v[0];
     for (i=1; v[i]!='\0'; i++) {
-        v[i] = verify_char(v[i]);
+        // v[i] = verify_char(v[i]);
         h = (h*251+v[i]) % M;
     }
     if (h<0) return 0;
     return h;
 }
 
-char verify_char(uint ch) {
-    if (ch>=0x00E0 && ch<=0x00E5) return 'a';
-    if (ch==0x00E7) return 'c';
-    if (ch>=0x00E8 && ch<=0x00EB) return 'e';
-    if (ch>=0x00EC && ch<=0x00EF) return 'i';
-    if (ch>=0x00F2 && ch<=0x00F6) return 'o';
-    if (ch>=0x00F9 && ch<=0x00FC) return 'u';
-    else return ch;
-}
+// char verify_char(uint ch) {
+//     if (ch>=0x00E0 && ch<=0x00E5) return 'a';
+//     if (ch==0x00E7) return 'c';
+//     if (ch>=0x00E8 && ch<=0x00EB) return 'e';
+//     if (ch>=0x00EC && ch<=0x00EF) return 'i';
+//     if (ch>=0x00F2 && ch<=0x00F6) return 'o';
+//     if (ch>=0x00F9 && ch<=0x00FC) return 'u';
+//     else return ch;
+// }
 
 void STinit() {
     int h;
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
     STinit();
     while (fscanf(fp,"%s",w)!=EOF) {
         //puts(w);
-        if (w[strlen(w)-1]==',' || w[strlen(w)-1]=='.' || w[strlen(w)-1]=='!' || w[strlen(w)-1]=='?')
+        if (w[strlen(w)-1]==',' || w[strlen(w)-1]=='.' || w[strlen(w)-1]=='!' || w[strlen(w)-1]=='?' || w[strlen(w)-1]=='(' || w[strlen(w)-1]==')')
             w[strlen(w)-1] = '\0';
         
         tipoObjeto t = STsearch(w);
