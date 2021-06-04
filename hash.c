@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "hash.h"
+// #include "tnine.c"
 
 char stringvazia[1] = {'\0'};
 tipoObjeto objetn = {stringvazia,0};
@@ -123,6 +124,9 @@ string* predict(int input){
     return ans;
 }
 
+// void init_hash()
+// int main(int argc, char** argv)
+
 void init_hash() {
     FILE *fp;
     fp = fopen("texto1.txt","r");
@@ -145,15 +149,15 @@ void init_hash() {
             strcpy(aux->chave,w);
             aux->ocorrencias = 1;
             STinsert(aux);
-            // printf("%s -> %d\n", w, aux->ocorrencias);
+            printf("%s -> %d\n", w, aux->ocorrencias);
         }
         else { 
             STinsert(t);
-            // printf("%s -> %d\n", w, t->ocorrencias);
+            printf("%s -> %d\n", w, t->ocorrencias);
         }
     }
 
-    // tipoObjeto* teste = STsearch("assinalados");
+    // tipoObjeto* teste = STsearch("vós");
     // printf("%s -> %d\n", teste->chave, teste->ocorrencias);
     
     fclose(fp);
@@ -161,4 +165,6 @@ void init_hash() {
 
     // int input; printf("Type some numbers - "); scanf("%d", &input);
     // string* solution = predict(input);
+
+    //return 0;
 }
