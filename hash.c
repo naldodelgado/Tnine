@@ -3,23 +3,78 @@
 #include <string.h>
 #include <ctype.h>
 #include "hash.h"
-#include "input.c"
 
 
 char stringvazia[1] = {'\0'};
 tipoObjeto objetn = {stringvazia,0};
 
-#define M 262139
+#define M 989898
 
 link tab[M];
 
-int hash(string v) {
-    int i, h=v[0];
-    for (i=1; v[i]!='\0'; i++) {
-        h = (h*251+v[i]) % M;
+int c2n(char c) {
+    switch (c) {
+    case 'a':
+    case 'b':
+    case 'c':
+        return 2;
+    case 'd':
+    case 'e':
+    case 'f':
+        return 3;
+    case 'g':
+    case 'h':
+    case 'i':
+        return 4;
+    case 'j':
+    case 'k':
+    case 'l':
+        return 5;
+    case 'm':
+    case 'n':
+    case 'o':
+        return 6;
+    case 'p':
+    case 'q':
+    case 'r':
+    case 's':
+        return 7;
+    case 't':
+    case 'u':
+    case 'v':
+        return 8;
+    case 'w':
+    case 'x':
+    case 'y':
+    case 'z':
+        return 9;
+    default:
+        return 1;
     }
-     //printf("%d ",h);
-    if (h<0) return 0;
+}
+
+// int hash(string v) {
+//     int i, h=v[0];
+//     for (i=1; v[i]!='\0'; i++) {
+//         h = (h*251+v[i]) % M;
+//     }
+//      //printf("%d ",h);
+//     if (h<0) return 0;
+//     return h;
+// }
+
+int hash(string v) {
+    int size = strlen(v);
+    int count=0;
+    int h=0;
+    for (int i=0; i<size; i++) {
+        if (count>5) break;
+        h += c2n(v[i]);
+        h *=10;
+        count++;
+    }
+    h/=10;
+    printf(" ");
     return h;
 }
 
@@ -56,6 +111,20 @@ tipoObjeto* STsearch(string v) {
     return NULL;
 }
 
+string* predict(int input){
+    int count=0;
+    link t;
+    string* ans = malloc(256*sizeof(string));
+    
+    for (t=tab[input]; t!=NULL; t=t->next) {
+        puts(t->obj->chave);
+        strcpy(ans[count],t->obj->chave);
+        count++;
+    }
+
+    return ans;
+}
+
 int main(int argc, char* argv[]) {
     FILE *fp;
     fp = fopen(argv[1],"r");
@@ -89,8 +158,9 @@ int main(int argc, char* argv[]) {
     fclose(fp);
     puts("DONE READING FILE");
 
-    int input; scanf("%d", &input);
+    int input; printf("Type some numbers - "); scanf("%d", &input);
     string* solution = predict(input);
+
 
     return 0;
 }

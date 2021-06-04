@@ -10,7 +10,9 @@ struct STnode {
     link next;
 } STnode;
 
+int c2n(char c);
 int hash(string v);
 void STinit();
 void STinsert(tipoObjeto* obj);
 tipoObjeto* STsearch(string v);
+string* predict(int input);
