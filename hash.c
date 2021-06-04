@@ -149,11 +149,11 @@ void init_hash() {
             strcpy(aux->chave,w);
             aux->ocorrencias = 1;
             STinsert(aux);
-            printf("%s -> %d\n", w, aux->ocorrencias);
+            // printf("%s -> %d\n", w, aux->ocorrencias);
         }
         else { 
             STinsert(t);
-            printf("%s -> %d\n", w, t->ocorrencias);
+            // printf("%s -> %d\n", w, t->ocorrencias);
         }
     }
 

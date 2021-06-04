@@ -9,7 +9,7 @@
 
 char *values[12] = { "1", "2 abc", "3 def","4 ghi", "5 jkl", "6 mno","7 pqrs", "8 tuv", "9 wxyz", "* #","0", "SPACE"};
 
-static void print_hello(GtkWidget *widget, gpointer data) {
+static void print_terminal(GtkWidget *widget, gpointer data) {
     g_print("%s\n", (char*)data);
 }
 
@@ -31,7 +31,7 @@ static void activate(GtkApplication* app, gpointer user_data) {
     for (int i=0; i<4; i++) {
         for (int j=0; j<3; j++) {
             button = gtk_button_new_with_label(values[pos]);
-            g_signal_connect (button,"clicked",G_CALLBACK(print_hello),values[pos]);
+            g_signal_connect (button,"clicked",G_CALLBACK(print_terminal),values[pos]);
             gtk_grid_attach(GTK_GRID(grid),button,j,i,1,1);
             pos++;
         }
