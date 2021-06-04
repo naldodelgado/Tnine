@@ -4,13 +4,12 @@
 #include <ctype.h>
 #include "hash.h"
 
-
 char stringvazia[1] = {'\0'};
 tipoObjeto objetn = {stringvazia,0};
 
-#define M 989898
+#define M 9989898
 
-link tab[M];
+links tab[M];
 
 int c2n(char c) {
     switch (c) {
@@ -63,18 +62,18 @@ int c2n(char c) {
 //     return h;
 // }
 
-int hash(string v) {
+int hash(string v) {    
     int size = strlen(v);
     int count=0;
     int h=0;
     for (int i=0; i<size; i++) {
-        if (count>5) break;
+        if (count>6) break;
         h += c2n(v[i]);
         h *=10;
         count++;
     }
     h/=10;
-    printf(" ");
+    // printf("%d ", h);
     return h;
 }
 
@@ -87,13 +86,13 @@ void STinit() {
 void STinsert(tipoObjeto* obj) {
     string v = obj->chave;
     int h = hash(v);
-    link t;
+    links t;
     for (t=tab[h]; t!=NULL; t=t->next)
         if (strcmp(t->obj->chave,v)==0) break;
     if (t!=NULL)
         t->obj->ocorrencias++;
     else {
-        link novo = malloc(sizeof(STnode));
+        links novo = malloc(sizeof(STnode));
         novo->obj = obj;
         novo->next = tab[h];
         tab[h] = novo;
@@ -101,37 +100,36 @@ void STinsert(tipoObjeto* obj) {
 }
 
 tipoObjeto* STsearch(string v) {
-    link t;
+    links t;
     int h = hash(v);
     for (t=tab[h]; t!=NULL; t=t->next){
         if (strcmp(t->obj->chave,v)==0) break;
     }
     if (t!=NULL) return t->obj;
-    // puts("ok");
     return NULL;
 }
 
 string* predict(int input){
     int count=0;
-    link t;
-    string* ans = malloc(256*sizeof(string));
+    links t;
+    string* ans = malloc(100*sizeof(string));
     
     for (t=tab[input]; t!=NULL; t=t->next) {
-        puts(t->obj->chave);
-        strcpy(ans[count],t->obj->chave);
-        count++;
+        // printf("%s\n", t->obj->chave);
+        ans[count] = malloc(20);
+        strcpy(ans[count++],t->obj->chave);
     }
 
     return ans;
 }
 
-int main(int argc, char* argv[]) {
+void init_hash() {
     FILE *fp;
-    fp = fopen(argv[1],"r");
+    fp = fopen("texto1.txt","r");
     char *w = malloc(256*sizeof(char));
     STinit();
     while (fscanf(fp,"%s",w)!=EOF) {
-        if (w[strlen(w)-1]==',' || w[strlen(w)-1]=='.' || w[strlen(w)-1]=='!' || w[strlen(w)-1]=='?' || w[strlen(w)-1]==')')
+        if (w[strlen(w)-1]==',' || w[strlen(w)-1]=='.' || w[strlen(w)-1]==':' || w[strlen(w)-1]=='!' || w[strlen(w)-1]=='?' || w[strlen(w)-1]==')')
             w[strlen(w)-1] = '\0';
         
         int size_w = strlen(w);
@@ -154,13 +152,13 @@ int main(int argc, char* argv[]) {
             // printf("%s -> %d\n", w, t->ocorrencias);
         }
     }
+
+    // tipoObjeto* teste = STsearch("assinalados");
+    // printf("%s -> %d\n", teste->chave, teste->ocorrencias);
     
     fclose(fp);
-    puts("DONE READING FILE");
+    printf("Done reading files\n\n");
 
-    int input; printf("Type some numbers - "); scanf("%d", &input);
-    string* solution = predict(input);
-
-
-    return 0;
+    // int input; printf("Type some numbers - "); scanf("%d", &input);
+    // string* solution = predict(input);
 }

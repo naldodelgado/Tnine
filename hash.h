@@ -4,10 +4,10 @@ typedef struct {
     int ocorrencias;
 } tipoObjeto;
 
-typedef struct STnode *link;
+typedef struct STnode *links;
 struct STnode {
     tipoObjeto* obj;
-    link next;
+    links next;
 } STnode;
 
 int c2n(char c);
